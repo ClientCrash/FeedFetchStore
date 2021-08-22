@@ -1,0 +1,2 @@
+#EXAMPLE PASTE YOUR OWN URLS HERE
+https://www.spiegel.de/schlagzeilen/index.rss
