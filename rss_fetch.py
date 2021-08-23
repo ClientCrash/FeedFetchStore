@@ -7,7 +7,7 @@ import sys
 import os
 
 print("python x.py <dbconf> <url list file> <sleeptime between request>")
-CONF_SLEEPTIME = sys.argv[3]
+CONF_SLEEPTIME = int(sys.argv[3])
 class bcolors:
     HEADER = ''
     OKBLUE = ''
@@ -64,32 +64,31 @@ DB_TABLE = "tb"
 
 urls=[]
 
-def getDBData():
-    dbfile = open(str(sys.argv[1]),"r")
-    dbfile.readline() # skip fist line for comment and title
-    DB_HOST = dbfile.readline()
-    DB_USER = dbfile.readline()
-    DB_PASSWORD = dbfile.readline()
-    DB_DATABASE = dbfile.readline()
-    DB_TABLE = dbfile.readline()
-    dbfile.close()
+
+dbfile = open(str(sys.argv[1]),"r")
+print(dbfile.readline()) # skip fist line for comment and title
+DB_HOST = dbfile.readline()
+DB_USER = dbfile.readline()
+DB_PASSWORD = dbfile.readline()
+DB_DATABASE = dbfile.readline()
+DB_TABLE = dbfile.readline()
+dbfile.close()
     
-def getURLs():
-    urlfile = open(str(sys.argv[2]),"r")
-    urlfile.readline()
-    while ulrfile:
-        line = urlfile.readline()
-        if line == "":
-            break
-        if line.startswith("#"):
-            continue
-        urls.append(line)
-    urlfile.close()
+
+urlfile = open(str(sys.argv[2]),"r")
+urlfile.readline()
+while urlfile:
+    line = urlfile.readline()
+    if line == "":
+        break
+    if line.startswith("#"):
+        continue
+    urls.append(line)
+urlfile.close()
     
 
 
-getDBData()
-getURLs()
+
 items = []
 
 print("db connect")
@@ -107,10 +106,10 @@ def fetch():
                 f=feedparser.parse(url)
                 try:
                     print (bcolors.UNDERLINE + bcolors.OKBLUE + "#> " + f.feed.title + "")
-                    pcastname= f.feed.title
+                    feedname= f.feed.title
                 except Exception as e:
                     print(str(e))
-                    pcastname="0"
+                    feedname="0"
                 for e in f.entries:
                     title = e.title
                     try:
@@ -147,9 +146,9 @@ def fetch():
                         pass
                     else:
                         items.append(id)
-                        print(str(pcastname +  " [" + str(date) + "]" + " #"+id+"   : " + title ) + "")
+                        print(str(feedname +  " [" + str(date) + "]" + " #"+id+"   : " + title ) + "")
                     sql = "INSERT IGNORE INTO "+DB_TABLE+" (title, date, id, description, pcastname, raw, summary, content, link, feed_url) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s,%s)"
-                    val = (title, date,id,desc,pcastname,str(e),su,str(con),link,url)
+                    val = (title, date,id,desc,feedname,str(e),su,str(con),link,url)
                     mycursor.execute(sql, val)
 
                     mydb.commit()
