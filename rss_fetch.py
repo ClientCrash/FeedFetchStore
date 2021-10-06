@@ -8,60 +8,13 @@ import os
 
 print("python x.py <dbconf> <url list file> <sleeptime between request>")
 CONF_SLEEPTIME = int(sys.argv[3])
-class bcolors:
-    HEADER = ''
-    OKBLUE = ''
-    OKCYAN = ''
-    OKGREEN = ''
-    WARNING = ''
-    FAIL = ''
-    ENDC = ''
-    BOLD = ''
-    UNDERLINE = ''
 
-print (bcolors.OKCYAN + "Go!")
+print ("Go!")
 DB_HOST = "localhost" #default values
 DB_USER = "user"
 DB_PASSWORD = "password"
 DB_DATABASE = "db"
 DB_TABLE = "tb"
-
-# EXAMPLE VALUES!
-# MOST PODCASTS ARE ALSO SUPPORTED!
-# HAVE FUN ;)
-#urls = [
-#        "https://www.spiegel.de/schlagzeilen/index.rss",
-#        "https://www.spiegel.de/schlagzeilen/eilmeldungen/index.rss",
-#        "https://www.bild.de/rssfeeds/vw-alles/vw-alles-26970192,dzbildplus=false,sort=1,teaserbildmobil=false,view=rss2,wtmc=ob.feed.bild.xml",
-#        "https://www.faz.net/rss/aktuell/",
-#        "https://news.ycombinator.com/rss",
-#        "http://rss.cnn.com/rss/edition.rss",
-#        "http://rss.cnn.com/rss/edition_europe.rss",
-#        "http://rss.cnn.com/rss/edition_space.rss",
-#        "http://rss.cnn.com/rss/edition_technology.rss",
-#        "http://rss.cnn.com/rss/edition_us.rss",
-#        "http://feeds.foxnews.com/foxnews/latest",
-#        "http://feeds.foxnews.com/foxnews/politics",
-#        "http://feeds.foxnews.com/foxnews/world",
-#        "http://feeds.bbci.co.uk/news/world/europe/rss.xml",
-#        "http://feeds.bbci.co.uk/news/politics/rss.xml",
-#        "http://feeds.bbci.co.uk/news/technology/rss.xml",
-#        "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-#        "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-#        "https://rss.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml",
-#        "https://www.tagesschau.de/xml/rss2/",
-#        "http://feeds.t-online.de/rss/nachrichten",
-#        "https://www.rtl.de/feeds/alle-news",
-#        "https://www.rtl.de/feeds/tv",
-#        "http://rss.focus.de/fol/XML/rss_folnews.xml",
-#        "https://www.heise.de/rss/heise.rdf",
-#        "https://newsfeed.kicker.de/news/em",
-#        "http://www.aljazeera.com/xml/rss/all.xml",
-#        "https://www.buzzfeed.com/world.xml",
-#        "https://www.theguardian.com/world/rss",
-#        "http://feeds.washingtonpost.com/rss/world"]
-
-
 urls=[]
 
 
@@ -105,7 +58,7 @@ def fetch():
         
                 f=feedparser.parse(url)
                 try:
-                    print (bcolors.UNDERLINE + bcolors.OKBLUE + "#> " + f.feed.title + "")
+                    print ("#> " + f.feed.title + "")
                     feedname= f.feed.title
                 except Exception as e:
                     print(str(e))
