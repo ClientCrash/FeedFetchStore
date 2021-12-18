@@ -29,8 +29,10 @@ while urlfile:
     urls.append(line)
 urlfile.close()
     
-
-
+v= FALSE
+if len(sys.argv) == 5:
+    if sys.argv[4] == "verbose":
+        v=TRUE
 
 items = []
 
