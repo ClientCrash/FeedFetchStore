@@ -8,16 +8,8 @@ import os
 
 print("python x.py <dbconf> <url list file> <sleeptime between request>")
 CONF_SLEEPTIME = int(sys.argv[3])
-
 print ("Go!")
-DB_HOST = "localhost" #default values
-DB_USER = "user"
-DB_PASSWORD = "password"
-DB_DATABASE = "db"
-DB_TABLE = "tb"
 urls=[]
-
-
 dbfile = open(str(sys.argv[1]),"r")
 print(dbfile.readline()) # skip fist line for comment and title
 DB_HOST = dbfile.readline()
@@ -26,8 +18,6 @@ DB_PASSWORD = dbfile.readline()
 DB_DATABASE = dbfile.readline()
 DB_TABLE = dbfile.readline()
 dbfile.close()
-    
-
 urlfile = open(str(sys.argv[2]),"r")
 urlfile.readline()
 while urlfile:
